@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать пользователя</title>
+</head>
+<body>
+<h1>Редактировать пользователя</h1>
+<form th:action="@{/admin/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <div>
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" th:field="*{username}" required>
+    </div>
+    <br>
+    <div>
+        <label for="age">Возраст:</label>
+        <input type="number" id="age" th:field="*{age}" required>
+    </div>
+    <br>
+    <div>
+        <label for="gender">Пол:</label>
+        <select id="gender" th:field="*{gender}" required>
+            <option value="male" th:selected="${user.gender == 'male'}">Мужской</option>
+            <option value="female" th:selected="${user.gender == 'female'}">Женский</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" th:field="*{password}">
+    </div>
+    <br>
+    <div>
+        <h4>Roles:</h4>
+        <div th:each="role : ${roles}">
+            <label th:for="${'role-' + role.id}">
+                <input type="checkbox" th:id="'role-' + ${role.id}" th:field="*{roles}" th:value="${role.id}" th:checked="${#lists.contains(user.roles, role)}"/>
+                <span th:text="${role.role}"></span>
+            </label>
+        </div>
+    </div>
+    <br>
+    <div>
+        <button type="submit">Сохранить</button>
+    </div>
+</form>
+</body>
+</html>

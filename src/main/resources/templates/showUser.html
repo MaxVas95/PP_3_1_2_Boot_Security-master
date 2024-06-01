@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль пользователя</title>
+</head>
+<body>
+<h1>Профиль пользователя</h1>
+<div>
+    <p>Имя пользователя: <span th:text="${user.username}"></span></p>
+    <p>Возраст: <span th:text="${user.age}"></span></p>
+    <p>Пол: <span th:text="${user.gender}"></span></p>
+    <p>Роли: <span th:each="role : ${user.roles}" th:text="${role.name} + ' '"></span></p>
+</div>
+<div>
+    <a href="/">Домой</a>
+</div>
+</body>
+</html>
